@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="INFO" monitorInterval="30"
+	packages="org.apache.logging.log4j.*">
+	<Properties>
+		<Property name="LOG_PATTERN"> %d{yyyy-MM-dd HH:mm:ss.SSS} %5p ${hostName}
+			--- [%15.15t] %-40.40c{1.} : %m%n%ex
+		</Property>
+	</Properties>
+	<Appenders>
+		<Console name="ConsoleAppender" target="SYSTEM_OUT"
+			follow="true">
+			<PatternLayout>
+				<Pattern>%d{yyyy-MM-dd HH:mm:ss} %c{1}:%L %m %n</Pattern>
+			</PatternLayout>
+		</Console>
+		<RollingFile name="FileAppender"
+			fileName="D:/log/ffm/master_core-today.log"
+			filePattern="D:/log/ffm/master_core-%d{yyyy-MM-dd}.log">
+			<PatternLayout>
+				<Pattern>%d{yyyy-MM-dd HH:mm:ss} %c{1}:%L %m %n</Pattern>
+			</PatternLayout>
+			<Policies>
+				<TimeBasedTriggeringPolicy interval="1" />
+			</Policies>
+			<DefaultRolloverStrategy>
+				<Delete basePath="D:/log/ffm/" maxDepth="1">
+					<IfFileName glob="master_core-*.log" />
+					<IfLastModified age="7d" />
+				</Delete>
+			</DefaultRolloverStrategy>
+		</RollingFile>
+	</Appenders>
+	<Loggers>
+		<Root level="INFO">
+			<AppenderRef ref="ConsoleAppender" />
+			<AppenderRef ref="FileAppender" />
+		</Root>
+	</Loggers>
+</Configuration>

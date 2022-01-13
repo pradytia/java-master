@@ -1,0 +1,8 @@
+target
+/.idea/
+/.settings/
+/build/
+.classpath
+.project
+master_core.iml
+UnitTest
